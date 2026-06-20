@@ -1,0 +1,15 @@
+{
+  "name": "noir-delicacies",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Noir Delicacies – Luxury in Every Bite. Marketing website.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.4.10"
+  }
+}
