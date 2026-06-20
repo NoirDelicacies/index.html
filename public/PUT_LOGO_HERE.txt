@@ -1,9 +1,0 @@
-Drop your logo file here and name it "logo.png" (e.g. public/logo.png).
-
-The site references it as /logo.png. If you don't add a logo, the page
-already has a graceful fallback: the <img> tag's onerror handler hides
-the broken image and shows the "NOIR ✦ DELICACIES" text logo instead,
-so the site still looks correct without this file.
-
-Recommended size: roughly 200x200px (or any reasonable square/landscape
-PNG with a transparent background) for crisp display in the navbar and hero.
