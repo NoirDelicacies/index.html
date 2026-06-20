@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Noir Delicacies – Luxury in Every Bite</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #E55500;
+      --orange-light: #FF6A00;
+      --brown-dark: #2C1208;
+      --brown-mid: #5A3A2A;
+      --cream: #FBF8F4;
+      --cream-dark: #F0EAE0;
+      --gold: #C8922A;
+      --text: #1A0A04;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 60px;
+      background: rgba(251,248,244,0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(229,85,0,0.12);
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 2px 24px rgba(0,0,0,0.08); }
+    .nav-logo {
+      display: flex; align-items: center;
+      text-decoration: none;
+    }
+    .nav-logo img {
+      height: 52px; width: auto;
+      object-fit: contain;
+    }
+    .nav-logo-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px; font-weight: 600; letter-spacing: 3px;
+      color: var(--brown-dark); display: none;
+    }
+    .nav-logo-text span { color: var(--orange); }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--brown-mid); text-decoration: none; font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--orange); }
+    .nav-cta {
+      background: var(--orange); color: #fff;
+      padding: 10px 24px; border-radius: 2px;
+      font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+      font-weight: 600; text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .nav-cta:hover { background: var(--brown-dark); transform: translateY(-1px); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { width: 24px; height: 2px; background: var(--brown-dark); transition: all 0.3s; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      background: linear-gradient(160deg, #FBF8F4 0%, #F5EDE0 50%, #EFE0CC 100%);
+      position: relative; overflow: hidden; padding: 120px 40px 80px;
+    }
+    .hero-bg-circle {
+      position: absolute; border-radius: 50%;
+      background: radial-gradient(circle, rgba(229,85,0,0.06) 0%, transparent 70%);
+    }
+    .hero-bg-circle.c1 { width: 800px; height: 800px; top: -200px; right: -200px; }
+    .hero-bg-circle.c2 { width: 500px; height: 500px; bottom: -100px; left: -100px; }
+    .hero-content { position: relative; max-width: 780px; }
+    .hero-eyebrow {
+      font-size: 11px; letter-spacing: 5px; text-transform: uppercase;
+      color: var(--orange); font-weight: 500; margin-bottom: 20px;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(56px, 8vw, 96px);
+      font-weight: 600; line-height: 1.0;
+      color: var(--brown-dark); margin-bottom: 10px;
+    }
+    .hero-title em { font-style: italic; color: var(--orange); }
+    .hero-divider {
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      margin: 24px auto;
+    }
+    .hero-divider .line { width: 80px; height: 1px; background: var(--orange); }
+    .hero-divider .diamond { width: 8px; height: 8px; background: var(--orange); transform: rotate(45deg); }
+    .hero-sub {
+      font-size: 13px; letter-spacing: 1.5px; color: var(--brown-mid);
+      line-height: 1.8; margin-bottom: 40px; font-weight: 300;
+    }
+    .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--orange); color: #fff;
+      padding: 15px 36px; border-radius: 2px;
+      font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase;
+      font-weight: 600; text-decoration: none;
+      transition: all 0.25s; display: inline-block;
+    }
+    .btn-primary:hover { background: var(--brown-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(229,85,0,0.3); }
+    .btn-outline {
+      border: 1.5px solid var(--brown-dark); color: var(--brown-dark);
+      padding: 14px 36px; border-radius: 2px;
+      font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase;
+      font-weight: 600; text-decoration: none;
+      transition: all 0.25s; display: inline-block;
+    }
+    .btn-outline:hover { background: var(--brown-dark); color: #fff; transform: translateY(-2px); }
+    .hero-badges {
+      display: flex; gap: 32px; justify-content: center;
+      margin-top: 60px; flex-wrap: wrap;
+    }
+    .badge {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 11px; letter-spacing: 1px; color: var(--brown-mid);
+    }
+    .badge-icon { font-size: 18px; }
+
+    /* ── SECTION COMMON ── */
+    section { padding: 100px 60px; }
+    .section-label {
+      font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--orange); font-weight: 600; margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 4vw, 52px); font-weight: 600;
+      color: var(--brown-dark); line-height: 1.2; margin-bottom: 16px;
+    }
+    .section-title em { font-style: italic; color: var(--orange); }
+    .section-subtitle {
+      font-size: 13px; color: var(--brown-mid); line-height: 1.9;
+      font-weight: 300; max-width: 560px;
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      background: var(--brown-dark);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+    #about .section-label { color: var(--gold); }
+    #about .section-title { color: #FBF8F4; }
+    #about .section-title em { color: var(--orange); }
+    #about .section-subtitle { color: rgba(251,248,244,0.7); max-width: none; }
+    .about-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px;
+    }
+    .stat { text-align: center; padding: 24px; background: rgba(255,255,255,0.05); border-radius: 4px; border: 1px solid rgba(229,85,0,0.2); }
+    .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 600; color: var(--orange); }
+    .stat-label { font-size: 10px; letter-spacing: 2px; color: rgba(251,248,244,0.5); text-transform: uppercase; margin-top: 4px; }
+    .about-visual {
+      position: relative; display: flex; align-items: center; justify-content: center;
+    }
+    .about-img-frame {
+      width: 100%; max-width: 440px;
+      aspect-ratio: 4/5;
+      background: linear-gradient(145deg, #4A2010, #2C1208);
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .about-img-frame::before {
+      content: '';
+      position: absolute; inset: 16px;
+      border: 1px solid rgba(229,85,0,0.3); border-radius: 2px;
+      pointer-events: none;
+    }
+    .about-monogram {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 120px; font-weight: 600; color: rgba(229,85,0,0.15);
+      letter-spacing: -4px; line-height: 1;
+      user-select: none;
+    }
+    .about-badge-float {
+      position: absolute; bottom: -16px; right: -16px;
+      background: var(--orange); color: #fff;
+      padding: 20px 24px; border-radius: 4px;
+      font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+      font-weight: 600; text-align: center; line-height: 1.5;
+      box-shadow: 0 8px 32px rgba(229,85,0,0.4);
+    }
+
+    /* ── PRODUCTS ── */
+    #products { background: var(--cream); }
+    .products-header { text-align: center; margin-bottom: 60px; }
+    .products-header .section-subtitle { margin: 0 auto; text-align: center; }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 28px; max-width: 1200px; margin: 0 auto;
+    }
+    .product-card {
+      background: #fff;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+    .product-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,0,0,0.12); }
+    .product-img {
+      height: 240px;
+      position: relative; overflow: hidden;
+    }
+    .product-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.5s;
+    }
+    .product-card:hover .product-img img { transform: scale(1.06); }
+    .product-img::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 55%, rgba(0,0,0,0.18));
+      pointer-events: none;
+    }
+    .product-body { padding: 24px; }
+    .product-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-weight: 600; color: var(--brown-dark); margin-bottom: 6px;
+    }
+    .product-desc { font-size: 12px; color: var(--brown-mid); line-height: 1.7; font-weight: 300; margin-bottom: 16px; }
+    .product-tag {
+      display: inline-block;
+      font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--orange); border: 1px solid rgba(229,85,0,0.3);
+      padding: 4px 10px; border-radius: 2px; font-weight: 500;
+    }
+    .product-order {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--orange); font-weight: 600; text-decoration: none;
+      margin-top: 16px; transition: gap 0.2s;
+    }
+    .product-order:hover { gap: 12px; }
+    .product-order::after { content: '→'; }
+
+    /* ── CORPORATE ── */
+    #corporate {
+      background: linear-gradient(135deg, #FBF8F4 0%, #F0E8DC 100%);
+      text-align: center;
+    }
+    .corporate-inner { max-width: 900px; margin: 0 auto; }
+    .corporate-features {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+      margin: 60px 0;
+    }
+    .corp-feature {
+      background: #fff; padding: 36px 28px; border-radius: 4px;
+      border-bottom: 3px solid var(--orange);
+      box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+    }
+    .corp-icon { font-size: 36px; margin-bottom: 16px; }
+    .corp-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--brown-dark); margin-bottom: 10px; }
+    .corp-desc { font-size: 12px; color: var(--brown-mid); line-height: 1.8; font-weight: 300; }
+    .corporate-cta { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 8px; }
+
+    /* ── HOW TO ORDER ── */
+    #order { background: var(--brown-dark); text-align: center; }
+    #order .section-label { color: var(--gold); }
+    #order .section-title { color: #FBF8F4; margin: 0 auto 16px; }
+    #order .section-title em { color: var(--orange); }
+    #order .section-subtitle { color: rgba(251,248,244,0.65); margin: 0 auto 60px; text-align: center; }
+    .order-steps {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+      max-width: 1000px; margin: 0 auto 60px;
+    }
+    .order-step { text-align: center; padding: 32px 20px; position: relative; }
+    .order-step:not(:last-child)::after {
+      content: '→';
+      position: absolute; right: -12px; top: 50%; transform: translateY(-60%);
+      color: rgba(229,85,0,0.4); font-size: 20px;
+    }
+    .step-num {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: rgba(229,85,0,0.15); border: 1.5px solid var(--orange);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+      font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 600; color: var(--orange);
+    }
+    .step-title { font-size: 13px; font-weight: 600; color: #FBF8F4; letter-spacing: 1px; margin-bottom: 8px; }
+    .step-desc { font-size: 11px; color: rgba(251,248,244,0.5); line-height: 1.7; }
+    .whatsapp-btn {
+      display: inline-flex; align-items: center; gap: 12px;
+      background: #25D366; color: #fff;
+      padding: 18px 40px; border-radius: 4px;
+      font-size: 13px; letter-spacing: 1.5px; font-weight: 600;
+      text-decoration: none; transition: all 0.25s;
+    }
+    .whatsapp-btn:hover { background: #1DA855; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(37,211,102,0.35); }
+    .whatsapp-icon { font-size: 22px; }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials { background: var(--cream); text-align: center; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; max-width: 1100px; margin: 60px auto 0; }
+    .testimonial {
+      background: #fff; padding: 36px 28px; border-radius: 4px;
+      border-top: 3px solid transparent;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+      text-align: left; transition: border-color 0.3s;
+    }
+    .testimonial:hover { border-top-color: var(--orange); }
+    .testimonial-stars { color: var(--gold); font-size: 16px; margin-bottom: 16px; }
+    .testimonial-text { font-size: 13px; color: var(--brown-mid); line-height: 1.8; font-style: italic; font-family: 'Cormorant Garamond', serif; font-size: 17px; margin-bottom: 20px; }
+    .testimonial-author { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--orange); font-weight: 600; }
+    .testimonial-role { font-size: 10px; color: var(--brown-mid); margin-top: 2px; }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: linear-gradient(160deg, #FBF8F4 0%, #EDE0D0 100%);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+    }
+    .contact-form-wrap { }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--brown-mid); font-weight: 600; margin-bottom: 8px; }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%; padding: 14px 16px;
+      background: #fff; border: 1.5px solid rgba(0,0,0,0.08);
+      border-radius: 2px; font-family: 'Montserrat', sans-serif; font-size: 13px;
+      color: var(--text); transition: border-color 0.2s;
+      outline: none;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--orange); }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .contact-info { padding-top: 8px; }
+    .contact-info-item { display: flex; gap: 16px; margin-bottom: 32px; align-items: flex-start; }
+    .contact-icon { font-size: 24px; margin-top: 2px; }
+    .contact-info-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); font-weight: 600; margin-bottom: 4px; }
+    .contact-info-value { font-size: 13px; color: var(--brown-mid); line-height: 1.6; }
+    .fssai-badge {
+      background: #fff; border: 1px solid rgba(229,85,0,0.2); border-radius: 4px;
+      padding: 16px 20px; display: inline-flex; align-items: center; gap: 12px;
+      margin-top: 32px;
+    }
+    .fssai-icon { font-size: 28px; }
+    .fssai-text { font-size: 11px; }
+    .fssai-text strong { display: block; color: var(--brown-dark); letter-spacing: 1px; text-transform: uppercase; font-size: 10px; }
+    .fssai-text span { color: var(--brown-mid); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #1A0A04; padding: 48px 60px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: gap;
+      gap: 24px;
+    }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; letter-spacing: 3px; color: #FBF8F4; }
+    .footer-logo span { color: var(--orange); }
+    .footer-tagline { font-size: 10px; letter-spacing: 3px; color: rgba(251,248,244,0.35); text-transform: uppercase; margin-top: 4px; }
+    .footer-copy { font-size: 11px; color: rgba(251,248,244,0.3); }
+    .footer-social { display: flex; gap: 16px; }
+    .social-link {
+      width: 38px; height: 38px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(251,248,244,0.5); text-decoration: none; font-size: 16px;
+      transition: all 0.2s;
+    }
+    .social-link:hover { border-color: var(--orange); color: var(--orange); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      section { padding: 70px 24px; }
+      #about { grid-template-columns: 1fr; gap: 48px; }
+      .about-visual { display: none; }
+      .about-stats { grid-template-columns: repeat(3,1fr); gap: 12px; }
+      .corporate-features { grid-template-columns: 1fr; }
+      .order-steps { grid-template-columns: 1fr 1fr; }
+      .order-step::after { display: none; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      #contact { grid-template-columns: 1fr; gap: 48px; }
+      footer { flex-direction: column; text-align: center; padding: 40px 24px; }
+    }
+    @media (max-width: 600px) {
+      .hero-title { font-size: 48px; }
+      .about-stats { grid-template-columns: 1fr; }
+      .order-steps { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    /* ── FLOATING WHATSAPP ── */
+    .float-wa {
+      position: fixed; bottom: 28px; right: 28px; z-index: 200;
+      width: 58px; height: 58px; border-radius: 50%;
+      background: #25D366; color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px; text-decoration: none;
+      box-shadow: 0 4px 24px rgba(37,211,102,0.45);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .float-wa:hover { transform: scale(1.1); box-shadow: 0 8px 32px rgba(37,211,102,0.55); }
+
+    /* scroll reveal */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.6s, transform 0.6s; }
+    .reveal.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">
+    <img src="logo.png" alt="Noir Delicacies" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+    <span class="nav-logo-text">NOIR <span>✦</span> DELICACIES</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#clean">Our Promise</a></li>
+    <li><a href="#corporate">Corporate</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#order" class="nav-cta">Order Now</a>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-circle c1"></div>
+  <div class="hero-bg-circle c2"></div>
+  <div class="hero-content reveal">
+    <img src="logo.png" alt="Noir Delicacies" style="height:140px;width:auto;object-fit:contain;margin-bottom:24px;display:block;margin-left:auto;margin-right:auto;" onerror="this.style.display='none'"/>
+    <p class="hero-eyebrow">Handcrafted in Ghaziabad</p>
+    <h1 class="hero-title">Luxury in<br/><em>Every Bite</em></h1>
+    <div class="hero-divider">
+      <div class="line"></div>
+      <div class="diamond"></div>
+      <div class="line"></div>
+    </div>
+    <p class="hero-sub">Artisan confections crafted with the finest natural ingredients — no artificial preservatives, no synthetic colours, no shortcuts.<br/>Made with a mother's care, good enough for your toddler, indulgent enough for every occasion.</p>
+    <div class="hero-btns">
+      <a href="#products" class="btn-primary">Explore Our Menu</a>
+      <a href="#corporate" class="btn-outline">Corporate Gifting</a>
+    </div>
+    <div class="hero-badges">
+      <div class="badge"><span class="badge-icon">🏅</span> FSSAI Licensed</div>
+      <div class="badge"><span class="badge-icon">🌿</span> No Artificial Additives</div>
+      <div class="badge"><span class="badge-icon">👶</span> Toddler-Safe Recipes</div>
+      <div class="badge"><span class="badge-icon">🤲</span> Home Crafted</div>
+      <div class="badge"><span class="badge-icon">🎁</span> Custom Gifting</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="reveal">
+    <p class="section-label">Our Story</p>
+    <h2 class="section-title">Born from a passion<br/>for <em>artisan craft</em></h2>
+    <p class="section-subtitle">Noir Delicacies was born from a mother's instinct — the belief that indulgence should never come at the cost of what goes into your body. We craft each piece by hand in our Ghaziabad kitchen, using premium, clean ingredients: real butter, unrefined sugars, natural colours from fruit and spice, and zero artificial preservatives.</p>
+    <p class="section-subtitle" style="margin-top:16px;">As a mother, our founder set one simple standard: if she wouldn't give it to her toddler, it doesn't go into our kitchen. From intimate celebrations to large corporate gifting — every Noir creation is honest, wholesome, and genuinely luxurious.</p>
+    <div class="about-stats">
+      <div class="stat">
+        <div class="stat-num">0</div>
+        <div class="stat-label">Artificial Additives</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Real Ingredients</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">✓</div>
+        <div class="stat-label">FSSAI Licensed</div>
+      </div>
+    </div>
+  </div>
+  <div class="about-visual reveal">
+    <div class="about-img-frame">
+      <div class="about-monogram">ND</div>
+      <div class="about-badge-float">Est. 2025<br/>Ghaziabad</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="products-header reveal">
+    <p class="section-label">Our Specialities</p>
+    <h2 class="section-title">Crafted with <em>love &amp; care</em></h2>
+    <p class="section-subtitle">Every product is made fresh to order, using the finest couverture chocolate, stone-milled flours, and seasonal ingredients.</p>
+  </div>
+  <div class="products-grid">
+
+    <div class="product-card reveal">
+      <div class="product-img"><img src="https://images.unsplash.com/photo-1481391243133-f96216dcb5d2?w=600&q=80" alt="Chocolates & Truffles" loading="lazy"/></div>
+      <div class="product-body">
+        <div class="product-name">Chocolates &amp; Truffles</div>
+        <p class="product-desc">Hand-rolled using single-origin couverture, real cream, and zero artificial flavouring. Rich, intense, and clean enough to share with your little ones.</p>
+        <span class="product-tag">Bestseller</span>
+        <a href="#order" class="product-order">Order via WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="product-card reveal">
+      <div class="product-img"><img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=600&q=80" alt="Cookies & Brownies" loading="lazy"/></div>
+      <div class="product-body">
+        <div class="product-name">Cookies &amp; Brownies</div>
+        <p class="product-desc">Made with unrefined cane sugar, real butter, and no artificial colours. Thick fudge brownies and NY-style cookies your whole family — toddlers included — can enjoy.</p>
+        <span class="product-tag">Fan Favourite</span>
+        <a href="#order" class="product-order">Order via WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="product-card reveal">
+      <div class="product-img"><img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?w=600&q=80" alt="Donuts" loading="lazy"/></div>
+      <div class="product-body">
+        <div class="product-name">Donuts</div>
+        <p class="product-desc">Brioche-style donuts glazed in dark chocolate, caramel, and seasonal flavours. Freshly fried and finished with artisan toppings.</p>
+        <span class="product-tag">Weekend Special</span>
+        <a href="#order" class="product-order">Order via WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="product-card reveal">
+      <div class="product-img"><img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600&q=80" alt="Croissants" loading="lazy"/></div>
+      <div class="product-body">
+        <div class="product-name">Croissants</div>
+        <p class="product-desc">Classic laminated butter croissants, baked to a perfect golden crisp with layers of honeyed flakiness. Plain, almond, and chocolate-filled.</p>
+        <span class="product-tag">Morning Delight</span>
+        <a href="#order" class="product-order">Order via WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="product-card reveal">
+      <div class="product-img"><img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=600&q=80" alt="Bombolone" loading="lazy"/></div>
+      <div class="product-body">
+        <div class="product-name">Bombolone</div>
+        <p class="product-desc">Italian-style filled doughnuts bursting with custard, Nutella, and seasonal fruit compotes — a truly indulgent Noir signature.</p>
+        <span class="product-tag">Italian Classic</span>
+        <a href="#order" class="product-order">Order via WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="product-card reveal">
+      <div class="product-img"><img src="https://images.unsplash.com/photo-1574184864703-3487b13f0edd?w=600&q=80" alt="Premium Dry Fruits" loading="lazy"/></div>
+      <div class="product-body">
+        <div class="product-name">Premium Dry Fruits</div>
+        <p class="product-desc">Handpicked nuts, figs, and berries — naturally sweetened, never sulphured, and coated in clean dark chocolate. A genuinely nutritious treat for all ages.</p>
+        <span class="product-tag">Gifting Special</span>
+        <a href="#order" class="product-order">Order via WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="product-card reveal">
+      <div class="product-img"><img src="https://images.unsplash.com/photo-1607344645866-009c320c5ab8?w=600&q=80" alt="Gifting Hampers" loading="lazy"/></div>
+      <div class="product-body">
+        <div class="product-name">Gifting Hampers</div>
+        <p class="product-desc">Curated luxury hampers combining our best-loved confections. Custom branding available for weddings, festivals, and corporate events.</p>
+        <span class="product-tag">Custom Orders</span>
+        <a href="#order" class="product-order">Order via WhatsApp</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CLEAN & CONSCIOUS -->
+<section id="clean" style="background: #F5F0E8; text-align: center; padding: 100px 60px;">
+  <div style="max-width: 960px; margin: 0 auto;">
+    <div class="reveal">
+      <p class="section-label">Our Promise</p>
+      <h2 class="section-title">Clean ingredients.<br/><em>No compromises.</em></h2>
+      <p class="section-subtitle" style="margin: 0 auto 60px; text-align: center; max-width: 620px;">
+        We read every label, question every supplier, and refuse every shortcut. Because we believe luxury and health are not opposites — they belong on the same plate.
+      </p>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin-bottom: 60px;" class="reveal">
+
+      <div style="background:#fff; padding:32px 24px; border-radius:4px; box-shadow:0 2px 16px rgba(0,0,0,0.05);">
+        <div style="font-size:40px; margin-bottom:14px;">🌿</div>
+        <div style="font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:600; color:var(--brown-dark); margin-bottom:10px;">No Artificial Colours</div>
+        <p style="font-size:12px; color:var(--brown-mid); line-height:1.8; font-weight:300;">We use natural hues from beetroot, turmeric, matcha, and fruit — vibrant, safe, and real.</p>
+      </div>
+
+      <div style="background:#fff; padding:32px 24px; border-radius:4px; box-shadow:0 2px 16px rgba(0,0,0,0.05);">
+        <div style="font-size:40px; margin-bottom:14px;">🚫</div>
+        <div style="font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:600; color:var(--brown-dark); margin-bottom:10px;">Zero Preservatives</div>
+        <p style="font-size:12px; color:var(--brown-mid); line-height:1.8; font-weight:300;">Every batch is made fresh to order. No stabilisers, no shelf-life chemicals — just honest freshness.</p>
+      </div>
+
+      <div style="background:#fff; padding:32px 24px; border-radius:4px; box-shadow:0 2px 16px rgba(0,0,0,0.05);">
+        <div style="font-size:40px; margin-bottom:14px;">🧈</div>
+        <div style="font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:600; color:var(--brown-dark); margin-bottom:10px;">Real Butter & Cream</div>
+        <p style="font-size:12px; color:var(--brown-mid); line-height:1.8; font-weight:300;">We never substitute with margarine or hydrogenated fats. Pure dairy, the way it should be.</p>
+      </div>
+
+      <div style="background:#fff; padding:32px 24px; border-radius:4px; box-shadow:0 2px 16px rgba(0,0,0,0.05);">
+        <div style="font-size:40px; margin-bottom:14px;">🍯</div>
+        <div style="font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:600; color:var(--brown-dark); margin-bottom:10px;">Natural Sweeteners</div>
+        <p style="font-size:12px; color:var(--brown-mid); line-height:1.8; font-weight:300;">Unrefined cane sugar, jaggery, honey, and dates — sweetened mindfully, never excessively.</p>
+      </div>
+
+    </div>
+
+    <!-- Mother's note -->
+    <div style="background: var(--brown-dark); border-radius:4px; padding: 48px 40px; position:relative; overflow:hidden;" class="reveal">
+      <div style="position:absolute; top:-40px; right:-40px; width:200px; height:200px; border-radius:50%; background:rgba(229,85,0,0.08);"></div>
+      <p style="font-size:10px; letter-spacing:4px; text-transform:uppercase; color:var(--gold); margin-bottom:16px; font-weight:600;">A Note from Our Founder</p>
+      <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(20px,2.5vw,28px); color:#FBF8F4; line-height:1.6; font-style:italic; max-width:680px; margin: 0 auto 24px;">
+        "As a mother, I started Noir Delicacies with one non-negotiable: every single item I make must be something I am completely comfortable giving to my own toddler. That standard shapes every recipe, every ingredient choice, every batch."
+      </p>
+      <p style="font-size:11px; letter-spacing:2px; color:rgba(251,248,244,0.5); text-transform:uppercase;">— Founder, Noir Delicacies</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- CORPORATE -->
+<section id="corporate">
+  <div class="corporate-inner">
+    <div class="reveal">
+      <p class="section-label">For Businesses</p>
+      <h2 class="section-title">Elevate your corporate<br/><em>gifting experience</em></h2>
+      <p class="section-subtitle" style="margin: 0 auto; text-align: center;">Make every client, employee, and partner feel valued with premium handcrafted confections — beautifully branded and delivered on time.</p>
+    </div>
+    <div class="corporate-features reveal">
+      <div class="corp-feature">
+        <div class="corp-icon">🏷️</div>
+        <div class="corp-title">Custom Branding</div>
+        <p class="corp-desc">Packaging personalised with your company logo, message, and brand colours. Perfect for Diwali, New Year, and client appreciation.</p>
+      </div>
+      <div class="corp-feature">
+        <div class="corp-icon">📦</div>
+        <div class="corp-title">Bulk Orders</div>
+        <p class="corp-desc">Competitive pricing for orders above 20 boxes. Flexible quantities to suit team sizes — from 20 to 2000+ pieces.</p>
+      </div>
+      <div class="corp-feature">
+        <div class="corp-icon">🚚</div>
+        <div class="corp-title">Pan-City Delivery</div>
+        <p class="corp-desc">Reliable delivery across Ghaziabad, Noida, and Delhi NCR. We co-ordinate logistics so you don't have to.</p>
+      </div>
+    </div>
+    <div class="corporate-cta reveal">
+      <a href="https://wa.me/918447466027?text=Hi%20Noir%20Delicacies%2C%20I%20am%20interested%20in%20corporate%20gifting" class="btn-primary" target="_blank">Enquire on WhatsApp</a>
+      <a href="mailto:noirdelicacies@gmail.com" class="btn-outline">Send an Email</a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO ORDER -->
+<section id="order">
+  <p class="section-label">Simple &amp; Easy</p>
+  <h2 class="section-title" style="text-align:center;">How to <em>order</em></h2>
+  <p class="section-subtitle">Ordering is simple — just reach us on WhatsApp and we'll handle the rest.</p>
+  <div class="order-steps reveal">
+    <div class="order-step">
+      <div class="step-num">1</div>
+      <div class="step-title">Browse the Menu</div>
+      <p class="step-desc">Explore our products above and decide what you'd like to order.</p>
+    </div>
+    <div class="order-step">
+      <div class="step-num">2</div>
+      <div class="step-title">WhatsApp Us</div>
+      <p class="step-desc">Drop us a message with your selection, quantity, and delivery date.</p>
+    </div>
+    <div class="order-step">
+      <div class="step-num">3</div>
+      <div class="step-title">Confirm &amp; Pay</div>
+      <p class="step-desc">We confirm availability, share pricing, and accept payment via UPI.</p>
+    </div>
+    <div class="order-step">
+      <div class="step-num">4</div>
+      <div class="step-title">Fresh Delivery</div>
+      <p class="step-desc">Your order is freshly prepared and delivered to your doorstep.</p>
+    </div>
+  </div>
+  <a href="https://wa.me/918447466027?text=Hi%20Noir%20Delicacies!%20I%27d%20like%20to%20place%20an%20order." class="whatsapp-btn reveal" target="_blank">
+    <span class="whatsapp-icon">💬</span> Order on WhatsApp
+  </a>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="reveal">
+    <p class="section-label">What People Say</p>
+    <h2 class="section-title">Loved by every <em>sweet tooth</em></h2>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial reveal">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">"The truffles were absolutely divine — melt-in-your-mouth perfection. Ordered for our Diwali gifting and everyone loved them!"</p>
+      <div class="testimonial-author">Priya Sharma</div>
+      <div class="testimonial-role">Ghaziabad</div>
+    </div>
+    <div class="testimonial reveal">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">"We placed a bulk order of 150 hampers for our year-end corporate gifting. Delivered on time, beautifully packaged. Will definitely reorder!"</p>
+      <div class="testimonial-author">Rahul Mehra</div>
+      <div class="testimonial-role">Head of HR, Tech Firm, Noida</div>
+    </div>
+    <div class="testimonial reveal">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">"The bombolone and croissants are out of this world. I had them at a friend's birthday and immediately placed my own order. Pure luxury!"</p>
+      <div class="testimonial-author">Ankita Joshi</div>
+      <div class="testimonial-role">Delhi NCR</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-form-wrap reveal">
+    <p class="section-label">Get in Touch</p>
+    <h2 class="section-title">Send us a <em>message</em></h2>
+    <p class="section-subtitle" style="margin-bottom: 36px;">For custom orders, corporate enquiries, or any questions — we'd love to hear from you.</p>
+    <form onsubmit="handleForm(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" placeholder="Anuj Singh" required/>
+        </div>
+        <div class="form-group">
+          <label>Phone / WhatsApp</label>
+          <input type="tel" placeholder="+91 98765 43210" required/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="you@example.com"/>
+      </div>
+      <div class="form-group">
+        <label>Enquiry Type</label>
+        <select>
+          <option>Personal Order</option>
+          <option>Corporate Gifting</option>
+          <option>Wedding / Event</option>
+          <option>Custom Hamper</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea placeholder="Tell us about your order or enquiry…"></textarea>
+      </div>
+      <button type="submit" class="btn-primary" style="width:100%; border:none; cursor:pointer; font-family:inherit;">Send Message</button>
+    </form>
+  </div>
+  <div class="contact-info reveal">
+    <p class="section-label">Find Us</p>
+    <h2 class="section-title" style="margin-bottom: 36px;">Always <em>available</em></h2>
+    <div class="contact-info-item">
+      <span class="contact-icon">📍</span>
+      <div>
+        <div class="contact-info-label">Location</div>
+        <div class="contact-info-value">Ghaziabad, Uttar Pradesh<br/>Serving Ghaziabad, Noida &amp; Delhi NCR</div>
+      </div>
+    </div>
+    <div class="contact-info-item">
+      <span class="contact-icon">💬</span>
+      <div>
+        <div class="contact-info-label">WhatsApp Orders</div>
+        <div class="contact-info-value">+91 84474 66027<br/>10 AM – 8 PM, Monday to Saturday</div>
+      </div>
+    </div>
+    <div class="contact-info-item">
+      <span class="contact-icon">📸</span>
+      <div>
+        <div class="contact-info-label">Instagram</div>
+        <div class="contact-info-value"><a href="https://www.instagram.com/noir_delicacies" target="_blank" style="color:var(--orange);text-decoration:none;">@noir_delicacies</a><br/>Follow us for daily drops &amp; behind-the-scenes</div>
+      </div>
+    </div>
+    <div class="contact-info-item">
+      <span class="contact-icon">📧</span>
+      <div>
+        <div class="contact-info-label">Email</div>
+        <div class="contact-info-value">noirdelicacies@gmail.com</div>
+      </div>
+    </div>
+    <div class="fssai-badge">
+      <span class="fssai-icon">🏅</span>
+      <div class="fssai-text">
+        <strong>FSSAI Licensed</strong>
+        <span>Application submitted &amp; in process</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">NOIR <span>✦</span> DELICACIES</div>
+    <div class="footer-tagline">Luxury in Every Bite</div>
+  </div>
+  <div class="footer-copy">© 2025 Noir Delicacies. All rights reserved.<br/>Handcrafted in Ghaziabad, India.</div>
+  <div class="footer-social">
+    <a href="https://www.instagram.com/noir_delicacies" class="social-link" title="Instagram" target="_blank">📸</a>
+    <a href="#" class="social-link" title="WhatsApp">💬</a>
+    <a href="#" class="social-link" title="Facebook">👤</a>
+  </div>
+</footer>
+
+<!-- Floating WhatsApp -->
+<a href="https://wa.me/918447466027?text=Hi%20Noir%20Delicacies!" class="float-wa" title="Chat on WhatsApp" target="_blank">💬</a>
+
+<script>
+  // Navbar scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => observer.observe(r));
+
+  // Form handler
+  function handleForm(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type="submit"]');
+    btn.textContent = '✓ Message Sent!';
+    btn.style.background = '#25D366';
+    setTimeout(() => { btn.textContent = 'Send Message'; btn.style.background = ''; }, 3000);
+  }
+
+  // Hamburger (mobile)
+  document.getElementById('hamburger').addEventListener('click', function() {
+    const links = document.querySelector('.nav-links');
+    if (links) {
+      links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+      links.style.position = 'fixed';
+      links.style.top = '64px'; links.style.left = '0'; links.style.right = '0';
+      links.style.flexDirection = 'column'; links.style.background = '#FBF8F4';
+      links.style.padding = '24px'; links.style.gap = '20px';
+      links.style.boxShadow = '0 8px 24px rgba(0,0,0,0.1)';
+    }
+  });
+</script>
+</body>
+</html>
